@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Chat Application
 
 A real-time chat application built with React, Node.js, Express, and Socket.io.
@@ -52,3 +53,6 @@ PORT=5000
 MONGO_URL=mongodb+srv://<username>:<password>@cluster.mongodb.net/chat?retryWrites=true&w=majority
 
 ```
+=======
+
+>>>>>>> 3e054d20c50d15fd4ea05f3bfef880aec9e8f7d6
