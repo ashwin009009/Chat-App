@@ -7,8 +7,15 @@ const app = express();
 const socket = require("socket.io");
 require("dotenv").config();
 
+// Set mongoose options
+mongoose.set('strictQuery', false);
+
 app.use(cors());
 app.use(express.json());
+
+// Enhanced MongoDB connection logging
+console.log("Attempting to connect to MongoDB...");
+console.log("Connection URL:", process.env.MONGO_URL.replace(/\/\/[^@]+@/, '//****:****@')); // Hide credentials in logs
 
 mongoose
   .connect(process.env.MONGO_URL, {
@@ -16,10 +23,14 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("DB Connetion Successfull");
+    console.log("✅ MongoDB Connection Successful");
+    console.log("Connected to database:", mongoose.connection.name);
+    console.log("Host:", mongoose.connection.host);
+    console.log("Port:", mongoose.connection.port);
   })
   .catch((err) => {
-    console.log(err.message);
+    console.error("❌ MongoDB Connection Error:", err.message);
+    process.exit(1); // Exit if database connection fails
   });
 
 app.get("/ping", (_req, res) => {

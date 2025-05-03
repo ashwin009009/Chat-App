@@ -17,8 +17,14 @@ export default function Login() {
     draggable: true,
     theme: "dark",
   };
+  // useEffect(() => {
+  //   if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
+  //     navigate("/");
+  //   }
+  // }, [navigate]);
   useEffect(() => {
-    if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
+    const user = localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY);
+    if (user) {
       navigate("/");
     }
   }, []);
@@ -55,7 +61,6 @@ export default function Login() {
           process.env.REACT_APP_LOCALHOST_KEY,
           JSON.stringify(data.user)
         );
-
         navigate("/");
       }
     }

@@ -1,68 +1,54 @@
-# Snappy - Chat Application 
-Snappy is chat application build with the power of MERN Stack. You can find the tutorial [here](https://www.youtube.com/watch?v=otaQKODEUFs)
+# Chat Application
 
+A real-time chat application built with React, Node.js, Express, and Socket.io.
 
-![login page](./images/snappy_login.png)
+## Features
 
-![home page](./images/snappy.png)
+- Real-time messaging
+- User authentication
+- Avatar support
+- Online/offline status
+- Message history
 
-## Installation Guide
+## Prerequisites
 
-### Requirements
-- [Nodejs](https://nodejs.org/en/download)
-- [Mongodb](https://www.mongodb.com/docs/manual/administration/install-community/)
+- Node.js (v14 or higher)
+- MongoDB
+- npm or yarn
 
-Both should be installed and make sure mongodb is running.
-### Installation
+## Installation
 
-#### First Method
-```shell
-git clone https://github.com/koolkishan/chat-app-react-nodejs
-cd chat-app-react-nodejs
+1. Clone the repository
+2. Install dependencies for both frontend and backend:
+   ```bash
+   # Install frontend dependencies
+   npm install
+
+   # Install backend dependencies
+   cd server
+   npm install
+   ```
+
+## Running the Application
+
+1. Start the backend server:
+   ```bash
+   cd server
+   npm start
+   ```
+
+2. In a new terminal, start the frontend:
+   ```bash
+   npm start
+   ```
+
+The application will be available at http://localhost:3000
+
+## Environment Variables
+
+Create a .env file in the server directory with the following variables:
 ```
-Now rename env files from .env.example to .env
-```shell
-cd public
-mv .env.example .env
-cd ..
-cd server
-mv .env.example .env
-cd ..
-```
+PORT=5000
+MONGO_URL=mongodb+srv://<username>:<password>@cluster.mongodb.net/chat?retryWrites=true&w=majority
 
-Now install the dependencies
-```shell
-cd server
-yarn
-cd ..
-cd public
-yarn
 ```
-We are almost done, Now just start the development server.
-
-For Frontend.
-```shell
-cd public
-yarn start
-```
-For Backend.
-
-Open another terminal in folder, Also make sure mongodb is running in background.
-```shell
-cd server
-yarn start
-```
-Done! Now open localhost:3000 in your browser.
-
-#### Second Method
-- This method requires docker and docker-compose to be installed in your system.
-- Make sure you are in the root of your project and run the following command.
-
-```shell
-docker compose build --no-cache
-```
-after the build is complete run the containers using the following command
-```shell
-docker compose up
-```
-now open localhost:3000 in your browser.

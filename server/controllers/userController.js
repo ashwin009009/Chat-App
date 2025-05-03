@@ -19,23 +19,52 @@ module.exports.login = async (req, res, next) => {
 
 module.exports.register = async (req, res, next) => {
   try {
+    console.log("Registration request received:", req.body);
     const { username, email, password } = req.body;
+    
+    // Log the exact query being used
+    console.log("Checking for existing username with query:", { username });
     const usernameCheck = await User.findOne({ username });
-    if (usernameCheck)
+    console.log("Username check result:", usernameCheck ? "Found" : "Not found");
+    
+    if (usernameCheck) {
+      console.log("Username already exists:", username);
       return res.json({ msg: "Username already used", status: false });
+    }
+    
+    console.log("Checking for existing email with query:", { email });
     const emailCheck = await User.findOne({ email });
-    if (emailCheck)
+    console.log("Email check result:", emailCheck ? "Found" : "Not found");
+    
+    if (emailCheck) {
+      console.log("Email already exists:", email);
       return res.json({ msg: "Email already used", status: false });
+    }
+    
+    console.log("Creating new user with data:", { username, email });
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create({
       email,
       username,
       password: hashedPassword,
     });
+    
+    console.log("User created successfully:", {
+      id: user._id,
+      username: user.username,
+      email: user.email
+    });
+    
     delete user.password;
     return res.json({ status: true, user });
   } catch (ex) {
-    next(ex);
+    console.error("Registration error:", ex);
+    // Send more detailed error information
+    return res.status(500).json({ 
+      msg: "Registration failed", 
+      error: ex.message,
+      status: false 
+    });
   }
 };
 
